@@ -1,0 +1,5 @@
+libdevice.10.bc is in CUDA_PATH/nvvm/libdevice
+(In some case, tensorflow cannot find your libdevice)
+
+cudnn is in CUDNN_PATH/bin
+(put all .so or .dll in this folder if you need specific cudnn version)
