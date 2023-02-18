@@ -5,6 +5,7 @@ cuda_lib/*
 !cuda_lib/Put livdevice.10.bc and cudnn in here.txt
 dataset/*
 !dataset/put your dataset in here.txt
+model_out/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
