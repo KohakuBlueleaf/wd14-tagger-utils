@@ -18,6 +18,9 @@ from keras.activations import sigmoid, softmax
 from keras.utils import image_dataset_from_directory
 from keras.callbacks import LearningRateScheduler, ModelCheckpoint
 
+import absl.logging
+absl.logging.set_verbosity(absl.logging.ERROR)
+
 from config import (
     SEED,
     WD14_TAGGER_REPO,
@@ -92,7 +95,7 @@ new_model = replace_classifier(
     classifier_func = classifier,
     freeze_original = True
 )
-new_model.summary(line_length=155)
+# new_model.summary(line_length=155)
 
 
 '''
@@ -100,7 +103,7 @@ Training!
 '''
 cp_callback = ModelCheckpoint(
     filepath = SAVE_PATH, 
-    save_freq = SAVE_FREQ,
+    save_freq = SAVE_FREQ*len(train_dataset),
 )
 base_lr = BASE_LR
 def scheduler(epoch, _):
