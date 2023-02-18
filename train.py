@@ -44,16 +44,19 @@ train_dataset = image_dataset_from_directory(
     batch_size = TRAIN_BATCH,
     seed = SEED,
     subset = 'training',
-    validation_split = VALID_SPLIT
+    validation_split = VALID_SPLIT,
 )
 augmentation = Sequential([
     RandomFlip("horizontal", seed=SEED),
     RandomRotation(0.5, seed=SEED),
     RandomTranslation(0.25, 0.25, seed=SEED),
     RandomContrast(0.3, seed=SEED),
-    RandomZoom(0.3, seed=SEED)
+    RandomZoom(0.3, seed=SEED),
 ])
-train_dataset = train_dataset.map(lambda x, y : (augmentation(x), y), num_parallel_calls=tf.data.AUTOTUNE)
+train_dataset = train_dataset.map(
+    lambda x, y: (augmentation(x), y),
+    num_parallel_calls = tf.data.AUTOTUNE
+)
 
 val_dataset = image_dataset_from_directory(
     DATASET_FOLDER,
@@ -115,7 +118,7 @@ history = new_model.fit(
     validation_data = val_dataset,
     epochs = EPOCH,
     callbacks = [lr_sch, cp_callback],
-    verbose = 1
+    verbose = 1,
 )
 
 new_model.save(SAVE_PATH)
