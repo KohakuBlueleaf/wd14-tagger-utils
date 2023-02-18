@@ -5,7 +5,10 @@ import tensorflow as tf
 from keras import mixed_precision
 import numpy as np
 
-from config import *
+from config import (
+    SEED, 
+    PRECISION,
+)
 
 
 os.environ["TF_CPP_MIN_LOG_LEVEL"] = "2"
