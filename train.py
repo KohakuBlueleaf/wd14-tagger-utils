@@ -2,7 +2,7 @@ from wd14 import download_tagger, replace_classifier
 
 import tensorflow as tf
 
-from keras import optimizers, losses
+from keras import optimizers, losses, Model
 from keras import Sequential
 from keras.models import load_model
 from keras.layers import (
@@ -74,7 +74,7 @@ val_dataset = image_dataset_from_directory(
 '''
 Load model and hijack it
 '''
-download_tagger(WD14_TAGGER_REPO, MODEL_DIR)
+# download_tagger(WD14_TAGGER_REPO, MODEL_DIR)
 model = load_model(MODEL_DIR)
 
 classes = CLASSES
@@ -110,6 +110,7 @@ def scheduler(epoch, _):
     return base_lr * LR_DECAY**epoch
 
 lr_sch = LearningRateScheduler(scheduler)
+new_model = load_model('./uma-92.5')
 new_model.compile(
     optimizer = optimizers.Adam(base_lr),
     loss = losses.SparseCategoricalCrossentropy(),
